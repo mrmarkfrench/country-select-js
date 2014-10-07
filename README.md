@@ -34,7 +34,7 @@ Try it for yourself using the included demo.html.
 
 2. Link the stylesheet (note that this references the image flags.png)
   ```html
-  <link rel="stylesheet" href="build/css/intlTelInput.css">
+  <link rel="stylesheet" href="build/css/countrySelect.css">
   ```
 
 3. Add the plugin script and initialise it on your input element
@@ -85,7 +85,7 @@ Set the dropdown's width to be the same as the input. This is automatically enab
 **destroy**  
 Remove the plugin from the input, and unbind any event listeners.  
 ```js
-$("#mobile-number").intlTelInput("destroy");
+$("#mobile-number").countrySelect("destroy");
 ```
 
 **getSelectedCountryData**  
