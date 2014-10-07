@@ -1,5 +1,5 @@
 # Country Select JS
-A jQuery plugin for selecting a country, based on the excellent International Telephone Input plugin (https://github.com/Bluefieldscom/intl-tel-input.git). It adds a flag dropdown to any input, which lists all the countries in English and the predominant national language next to their flags.
+A jQuery plugin for selecting a country, based on the excellent [International Telephone Input](https://github.com/Bluefieldscom/intl-tel-input.git) plugin. It adds a flag dropdown to any input, which lists all the countries in English and the predominant national language next to their flags.
 
 ![alt tag](https://raw.github.com/mrmarkfrench/country-select-js/master/screenshot.png)
 
