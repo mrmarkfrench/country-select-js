@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Country Select JS</title>
+		<link rel="stylesheet" href="build/css/countrySelect.min.css">
+		<link rel="stylesheet" href="build/css/demo.css">
+	</head>
+	<body>
+		<h1>Country Select JS</h1>
+		<form>
+			<div class="form-item">
+				<input id="country_selector" type="text">
+				<label for="country_selector" style="display:none;">Select a country here...</label>
+			</div>
+			<div class="form-item" style="display:none;">
+				<input type="text" id="country_selector_code" name="country_selector_code" data-countrycodeinput="1" readonly="readonly" placeholder="Selected country code will appear here" />
+				<label for="country_selector_code">...and the selected country code will be updated here</label>
+			</div>
+			<button type="submit" style="display:none;">Submit</button>
+		</form>
+
+		<!-- Load jQuery from CDN so can run demo immediately -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="build/js/countrySelect.min.js"></script>
+		<script>
+			$("#country_selector").countrySelect({
+				//defaultCountry: "jp",
+				//onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+				preferredCountries: ['ca', 'gb', 'us']
+			});
+		</script>
+	</body>
+</html>
