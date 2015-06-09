@@ -347,6 +347,7 @@
 				});
 				if (!alreadySelected) {
 					this._selectFlag(countryCodes[0]);
+					this.countryCodeInput.val(countryCodes[0]);
 				}
 				// Matching country found
 				return true;
