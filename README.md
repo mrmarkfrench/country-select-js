@@ -85,7 +85,7 @@ Set the dropdown's width to be the same as the input. This is automatically enab
 **destroy**  
 Remove the plugin from the input, and unbind any event listeners.  
 ```js
-$("#mobile-number").countrySelect("destroy");
+$("#country").countrySelect("destroy");
 ```
 
 **getSelectedCountryData**  
