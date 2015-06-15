@@ -328,8 +328,8 @@
 		// Update the selected flag using the input's current value
 		_updateFlagFromInputVal: function() {
 			var that = this;
-			// try and extract valid dial code from input
-			var value = this.countryInput.val();
+			// try and extract valid country from input
+			var value = this.countryInput.val().replace(/(?=[() ])/g, '\\');
 			if (value) {
 				var countryCodes = [];
 				var matcher = new RegExp("^"+value, "i");
