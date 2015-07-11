@@ -1,0 +1,33 @@
+{
+	"name": "country-select-js",
+	"version": "1.0.3",
+	"description": "A jQuery plugin for selecting a country",
+	"main": [
+		"build/js/countrySelect.js"
+	],
+	"dependencies": {
+		"jquery": ">=1.9.1"
+	},
+	"moduleType": [
+		"amd",
+		"globals",
+		"node"
+	],
+	"keywords": [
+		"country",
+		"international",
+		"jQuery"
+	],
+	"authors": [
+		"Mark French"
+	],
+	"license": "MIT",
+	"ignore": [
+		"**/.*",
+		"demo.html"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/mrmarkfrench/country-select-js.git"
+	}
+}
