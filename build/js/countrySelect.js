@@ -43,7 +43,7 @@
 	}
 	Plugin.prototype = {
 		init: function() {
-			// Process all the data: onlyCounties, preferredCountries, defaultCountry etc
+			// Process all the data: onlyCountries, preferredCountries, defaultCountry etc
 			this._processCountryData();
 			// Generate the markup
 			this._generateMarkup();
@@ -176,6 +176,10 @@
 				// check the defaultCountry option, else fall back to the first in the list
 				if (this.options.defaultCountry) {
 					defaultCountry = this._getCountryData(this.options.defaultCountry, false);
+					// Did we not find the requested default country?
+					if (!defaultCountry) {
+						defaultCountry = this.preferredCountries.length ? this.preferredCountries[0] : this.countries[0];
+					}
 				} else {
 					defaultCountry = this.preferredCountries.length ? this.preferredCountries[0] : this.countries[0];
 				}

@@ -66,7 +66,7 @@ Note: any options that take country codes should be lower case [ISO 3166-1 alpha
 
 **defaultCountry**  
 Type: `String` Default: `""`  
-Set the default country by it's country code. You can also set it to `"auto"`, which will lookup the user's country based on their IP address. Otherwise it will just be the first country in the list.
+Set the default country by it's country code. Otherwise it will just be the first country in the list.
 
 **onlyCountries**  
 Type: `Array` Default: `undefined`  
