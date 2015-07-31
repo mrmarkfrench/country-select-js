@@ -351,7 +351,7 @@
 				});
 				if (!alreadySelected) {
 					this._selectFlag(countryCodes[0]);
-					this.countryCodeInput.val(countryCodes[0]);
+					this.countryCodeInput.val(countryCodes[0]).trigger("change");
 				}
 				// Matching country found
 				return true;
@@ -427,7 +427,7 @@
 		},
 		// Replace any existing country name with the new one
 		_updateName: function(countryCode) {
-			this.countryCodeInput.val(countryCode);
+			this.countryCodeInput.val(countryCode).trigger("change");
 			this.countryInput.val(this._getCountryData(countryCode).name);
 		},
 		/********************
