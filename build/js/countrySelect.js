@@ -415,6 +415,9 @@
 		},
 		// check if an element is visible within its container, else scroll until it is
 		_scrollTo: function(element) {
+			if (!element || !element.offset()) {
+				return;
+			}
 			var container = this.countryList, containerHeight = container.height(), containerTop = container.offset().top, containerBottom = containerTop + containerHeight, elementHeight = element.outerHeight(), elementTop = element.offset().top, elementBottom = elementTop + elementHeight, newScrollTop = elementTop - containerTop + container.scrollTop();
 			if (elementTop < containerTop) {
 				// scroll up
