@@ -445,6 +445,7 @@
 		},
 		// update the selected flag
 		selectCountry: function(countryCode) {
+			countryCode = countryCode.toLowerCase();
 			// check if already selected
 			if (!this.selectedFlagInner.hasClass(countryCode)) {
 				this._selectFlag(countryCode);
