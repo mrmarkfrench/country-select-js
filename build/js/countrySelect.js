@@ -209,6 +209,15 @@
 					that._showDropdown();
 				}
 			});
+			// Despite above note, added blur to ensure partially spelled country
+			// with correctly chosen flag is spelled out on blur. Also, correctly
+			// selects flag when field is autofilled
+			this.countryInput.on("blur" + this.ns, function() {
+				if (that.countryInput.val() != that.getSelectedCountryData().name) {
+					that.setCountry(that.countryInput.val());
+				}
+				that.countryInput.val(that.getSelectedCountryData().name);
+			});
 		},
 		// Focus input and put the cursor at the end
 		_focus: function() {
@@ -337,7 +346,7 @@
 			if (value) {
 				var countryCodes = [];
 				var matcher = new RegExp("^"+value, "i");
-				for (var i =0; i < this.countries.length; i++) {
+				for (var i = 0; i < this.countries.length; i++) {
 					if (this.countries[i].name.match(matcher)) {
 						countryCodes.push(this.countries[i].iso2);
 					}
