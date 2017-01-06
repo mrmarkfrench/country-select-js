@@ -670,7 +670,7 @@
 		n: "Botswana",
 		i: "bw"
 	}, {
-		n: "Brazil (Brasil)",
+		n: "Brazil",
 		i: "br"
 	}, {
 		n: "British Indian Ocean Territory",
