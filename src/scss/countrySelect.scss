@@ -1,4 +1,4 @@
-$background-url: url("../../build/img/flags.png") !default;
+$flags-img-file: "../../build/img/flags.png" !default;
 
 .country-select {
   position: relative;
@@ -13,7 +13,7 @@ $background-url: url("../../build/img/flags.png") !default;
   .flag {
     width: 16px;
     height: 11px;
-    background: $background-url;
+    background: url($flags-img-file);
   }
 
   .hide {
