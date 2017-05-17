@@ -24,12 +24,11 @@
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-clean-css": "^3.3.1",
-    "gulp-gzip": "^1.4.0",
-    "gulp-ignore": "^2.0.2",
-    "gulp-imagemin": "^3.2.0",
     "gulp-minify": "^1.0.0",
     "gulp-notify": "^3.0.0",
     "gulp-rename": "^1.2.2",
-    "gulp-sass": "^3.1.0"
+    "gulp-sass": "^3.1.0",
+    "gulp-webserver": "^0.9.1",
+    "http": "0.0.0"
   }
 }
