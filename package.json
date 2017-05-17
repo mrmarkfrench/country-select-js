@@ -27,6 +27,7 @@
     "gulp-gzip": "^1.4.0",
     "gulp-ignore": "^2.0.2",
     "gulp-imagemin": "^3.2.0",
+    "gulp-minify": "^1.0.0",
     "gulp-notify": "^3.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0"
