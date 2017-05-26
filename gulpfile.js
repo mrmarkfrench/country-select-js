@@ -1,43 +1,69 @@
-var gulp        = require('gulp'),
-    sass        = require('gulp-sass'),
-    prefix      = require('gulp-autoprefixer'),
-    notify      = require('gulp-notify'),
-    cleanCSS    = require('gulp-clean-css'),
-    http        = require('http'),
-    ecstatic    = require('ecstatic'),
-    browserSync = require('browser-sync');
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+var prefix = require('gulp-autoprefixer');
+var notify = require('gulp-notify');
+var cleanCSS = require('gulp-clean-css');
+var minifyJS = require('gulp-minify');
+var rename = require('gulp-rename');
+var webserver = require('gulp-webserver');
 
-gulp.task('sass', function () {
-  gulp.src('./src/scss/countrySelect.scss')
-    .pipe(sass({ errLogToConsole: true }))
-    .pipe(prefix(['last 4 versions']))
-    .pipe(gulp.dest('./build/css'))
-    .pipe(notify("styles compiled"))
-    .pipe(browserSync.reload({ stream: true }))
+gulp.task('scss', function () {
+	gulp.src('./src/scss/countrySelect.scss')
+		.pipe(sass({ errLogToConsole: true  }))
+		.pipe(prefix())
+		.pipe(cleanCSS({compatibility: 'ie8', format: {
+			breaks: {
+				afterAtRule: true,
+				afterBlockBegins: true,
+				afterBlockEnds: true,
+				afterComment: true,
+				afterProperty: true,
+				afterRuleBegins: true,
+				afterRuleEnds: true,
+				beforeBlockEnds: true,
+				betweenSelectors: true
+			},
+			indentBy: 1,
+			indentWith: 'tab' }, level: 0}))
+		.pipe(gulp.dest('./build/css'))
+		.pipe(notify("styles compiled"));
 });
 
-gulp.task('minify', function () {
-  gulp.src('./build/css/countrySelect.css')
-    .pipe(cleanCSS({compatibility: 'ie8'}))
-    .pipe(prefix(['last 4 versions']))
-    .pipe(gulp.dest('./build/css'))
-    .pipe(notify("styles minified"))
-    .pipe(browserSync.reload({ stream: true }))
+gulp.task('js', function () {
+	gulp.src('./src/js/countrySelect.js')
+		.pipe(gulp.dest('./build/js'))
+		.pipe(notify("javascript updated"));
 });
 
-gulp.task('watch', function() {
-  http.createServer(
-    ecstatic({ root: __dirname })
-  ).listen(8080);
-  browserSync({
-    proxy: "0.0.0.0:8080",
-    files: ["./build/js/**/*.js"],
-    ghostMode: false,
-    notify: false,
-  });
-  gulp.watch('./src/scss/**/*.scss', ['sass']);
-  gulp.watch("./**/*.html").on('change', browserSync.reload);
+gulp.task('handle-sources', ['scss', 'js']);
+
+gulp.task('minify-scss', function () {
+	gulp.src('./build/css/countrySelect.css')
+		.pipe(cleanCSS({level: 2, inline: ['all']}))
+		.pipe(rename({extname: '.min.css'}))
+		.pipe(gulp.dest('./build/css'))
+		.pipe(notify("styles minified"));
 });
 
-gulp.task('default', ['sass', 'watch']);
-gulp.task('build', ['sass', 'minify']);
+gulp.task('minify-js', function () {
+	gulp.src('./build/js/countrySelect.js')
+		.pipe(minifyJS({ext:{min:'.min.js'}}))
+		.pipe(gulp.dest('./build/js'))
+		.pipe(notify("javascript minified"));
+});
+
+gulp.task('minify-sources', ['minify-scss', 'minify-js']);
+
+gulp.task('webserver', function() {
+	gulp.src('.')
+		.pipe(webserver({
+			livereload: true,
+			directoryListing: true,
+			open: './demo.html'
+		}));
+	gulp.watch('./src/scss/**/*.scss', ['scss']);
+	gulp.watch('./src/js/**/*.js', ['js']);
+});
+
+gulp.task('default', ['handle-sources', 'webserver']);
+gulp.task('build', ['handle-sources', 'minify-sources']);
