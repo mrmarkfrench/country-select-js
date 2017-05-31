@@ -160,6 +160,23 @@ The dropdown should automatically appear above/below the input depending on the 
 ## Contributing
 Contributions and improvements to the library are welcome! For instructions on contributing to a project on Github, see this guide: [Fork A Repo](https://help.github.com/articles/fork-a-repo).
 
+To start a local devserver with source code live reload install the dependencies with:
+
+```
+$ npm install
+```
+
+And run:
+
+```
+$ gulp
+```
+
+To transpile the scss source, minify and prepare your changes at src to build run:
+
+```
+$ gulp build
+```
 
 ## Attributions
 * This library is built based on the excellent [International Telephone Input](https://github.com/Bluefieldscom/intl-tel-input.git), the authors of which deserve any credit you might like to give (though none of the blame)

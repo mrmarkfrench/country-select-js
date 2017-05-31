@@ -9,9 +9,22 @@ var webserver = require('gulp-webserver');
 
 gulp.task('scss', function () {
 	gulp.src('./src/scss/countrySelect.scss')
-		.pipe(sass({ errLogToConsole: true }))
+		.pipe(sass({ errLogToConsole: true  }))
 		.pipe(prefix())
-		.pipe(cleanCSS({compatibility: 'ie8', format: 'beautify', level: 0}))
+		.pipe(cleanCSS({compatibility: 'ie8', format: {
+			breaks: {
+				afterAtRule: true,
+				afterBlockBegins: true,
+				afterBlockEnds: true,
+				afterComment: true,
+				afterProperty: true,
+				afterRuleBegins: true,
+				afterRuleEnds: true,
+				beforeBlockEnds: true,
+				betweenSelectors: true
+			},
+			indentBy: 1,
+			indentWith: 'tab' }, level: 0}))
 		.pipe(gulp.dest('./build/css'))
 		.pipe(notify("styles compiled"));
 });
