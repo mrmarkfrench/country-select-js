@@ -238,7 +238,9 @@
 			if (this.options.initialCountry === "auto") {
 				this._loadAutoCountry();
 			} else {
-				this.selectCountry(this.defaultCountry);
+				if (this.defaultCountry) {
+					this.selectCountry(this.defaultCountry);
+				}
 				this.autoCountryDeferred.resolve();
 			}
 		},
