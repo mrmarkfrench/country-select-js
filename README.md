@@ -41,7 +41,7 @@ Try it for yourself using the included demo.html.
   ```html
   <input type="text" id="country">
   
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="build/js/countrySelect.min.js"></script>
   <script>
     $("#country").countrySelect();
@@ -53,7 +53,7 @@ Try it for yourself using the included demo.html.
   <input type="text" id="country" />
   <input type="hidden" id="country_code" />
   
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="build/js/countrySelect.min.js"></script>
   <script>
     $("#country").countrySelect();
