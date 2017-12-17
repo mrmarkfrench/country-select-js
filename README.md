@@ -72,6 +72,10 @@ Set the default country by it's country code. Otherwise it will just be the firs
 Type: `Array` Default: `undefined`  
 Display only the countries you specify. Takes an array of country codes.
 
+**excludeCountries**  
+Type: `Array` Default: `undefined`  
+Display only the countries you specify. Takes an array of country codes.
+
 **preferredCountries**  
 Type: `Array` Default: `["us", "gb"]`  
 Specify the countries to appear at the top of the list.
