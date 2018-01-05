@@ -1,0 +1,30 @@
+// rgba is needed for the selected flag hover state to blend in with
+// the border-highlighting some browsers give the input on focus
+$hover-color: rgba(0, 0, 0, 0.05) !default;
+$grey-text: #999 !default;
+$grey-border: #ccc !default;
+
+$flag-height: 15px !default;
+$flag-width: 20px !default;
+$flag-padding: 8px !default;
+// this border width is used for the popup and divider, but it is also
+// assumed to be the border width of the input, which we do not control
+$border-width: 1px !default;
+
+$arrow-height: 4px !default;
+$arrow-width: 6px !default;
+$triangle-border: 3px !default;
+$arrow-padding: 6px !default;
+$arrow-color: #555 !default;
+
+$input-padding: 6px !default;
+$selected-flag-width: $flag-width + (2 * $flag-padding) !default;
+$selected-flag-arrow-width: $flag-width + $flag-padding + $arrow-width + (2 * $arrow-padding) !default;
+
+// image related variables
+$flags-image-path: "../../build/img/" !default;
+$flags-image-name: "flags" !default;
+$flags-image-extension: "png" !default;
+
+// enough space for them to click off to close
+$mobile-popup-margin: 30px;

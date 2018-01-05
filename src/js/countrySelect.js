@@ -131,7 +131,7 @@
 			// CSS triangle
 			$("<div>", {
 				"class": "arrow"
-			}).appendTo(this.selectedFlagInner);
+			}).appendTo(selectedFlag);
 			// country list contains: preferred countries, then divider, then all countries
 			this.countryList = $("<ul>", {
 				"class": "country-list v-hide"
@@ -293,7 +293,7 @@
 			// bind all the dropdown-related listeners: mouseover, click, click-off, keydown
 			this._bindDropdownListeners();
 			// update the arrow
-			this.selectedFlagInner.children(".arrow").addClass("up");
+			this.selectedFlagInner.parent().children(".arrow").addClass("up");
 		},
 		// decide where to position dropdown (depends on position within viewport, and scroll)
 		_setDropdownPosition: function() {
@@ -467,7 +467,7 @@
 		_closeDropdown: function() {
 			this.countryList.addClass("hide");
 			// update the arrow
-			this.selectedFlagInner.children(".arrow").removeClass("up");
+			this.selectedFlagInner.parent().children(".arrow").removeClass("up");
 			// unbind event listeners
 			$(document).off("keydown" + this.ns);
 			$("html").off("click" + this.ns);

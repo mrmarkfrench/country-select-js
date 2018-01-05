@@ -1,0 +1,214 @@
+.country-select {
+	// need position on the container so the selected flag can be
+	// absolutely positioned over the input
+	position: relative;
+	// keep the input's default inline properties
+	display: inline-block;
+
+	// paul irish says this is ok
+	// http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+	* {
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+
+	.hide {
+		display: none;
+	}
+
+	// need this during init, to get the height of the dropdown
+	.v-hide {
+		visibility: hidden;
+	}
+
+	// specify types to increase specificity e.g. to override bootstrap v2.3
+	input, input[type=text] {
+		position: relative;
+
+		// input is bottom level, below selected flag and dropdown
+		z-index: 0;
+
+		// any vertical margin the user has on their inputs would no longer work as expected
+		// because we wrap everything in a container div. i justify the use of !important
+		// here because i don't think the user should ever have vertical margin here - when
+		// the input is wrapped in a container, vertical margin messes up alignment with other
+		// inline elements (e.g. an adjacent button) in firefox, and probably other browsers.
+		margin-top: 0 !important;
+		margin-bottom: 0 !important;
+
+		// make space for the selected flag
+		// Note: no !important here, as the user may want to tweak this so that the
+		// perceived input padding matches their existing styles
+		padding-right: $selected-flag-width;
+
+		// any margin-right here will push the selected-flag away
+		margin-right: 0;
+	}
+
+	.flag-dropdown {
+		// positioned over the top of the input
+		position: absolute;
+
+		// full height
+		top: 0;
+		bottom: 0;
+		right: 0;
+
+		// prevent the highlighted child from overlapping the input border
+		padding: $border-width;
+	}
+
+	.selected-flag {
+		// render above the input
+		z-index: 1;
+		position: relative;
+		width: $selected-flag-width;
+
+		// this must be full-height both for the hover highlight, and to push down the
+		// dropdown so it appears below the input
+		height: 100%;
+		padding: 0 0 0 $flag-padding;
+
+		// vertically center the flag
+		.flag {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			margin: auto;
+		}
+
+		.arrow {
+			position: absolute;
+			// split the difference between the flag and the arrow height to verically center
+			top: 50%;
+			margin-top: -1 * ($arrow-height / 2);
+			right: $arrow-padding;
+
+			// css triangle
+			width: 0;
+			height: 0;
+			border-left: $triangle-border solid transparent;
+			border-right: $triangle-border solid transparent;
+			border-top: $arrow-height solid $arrow-color;
+
+			&.up {
+				border-top: none;
+				border-bottom: $arrow-height solid $arrow-color;
+			}
+		}
+	}
+
+	// the dropdown
+	.country-list {
+		position: absolute;
+		// popup so render above everything else
+		z-index: 2;
+
+		// override default list styles
+		list-style: none;
+		// in case any container has text-align:center
+		text-align: left;
+
+		// dropdown flags need consistent width, so wrap in a container
+		.flag {
+			display: inline-block;
+			width: $flag-width;
+		}
+
+		padding: 0;
+		// margin-left to compensate for the padding on the parent
+		margin: 0 0 0 (-$border-width);
+
+		box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+		background-color: white;
+		border: $border-width solid $grey-border;
+
+		// don't let the contents wrap AKA the container will be as wide as the contents
+		white-space: nowrap;
+		// except on small screens, where we force the dropdown width to match the input
+		@media (max-width: 500px) {
+			white-space: normal;
+		}
+
+		max-height: 200px;
+		overflow-y: scroll;
+
+		// the divider below the preferred countries
+		.divider {
+			padding-bottom: 5px;
+			margin-bottom: 5px;
+			border-bottom: $border-width solid $grey-border;
+		}
+
+		// each country item in dropdown (we must have separate class to differentiate from dividers)
+		.country {
+			// Note: decided not to use line-height here for alignment because it causes issues e.g. large font-sizes will overlap, and also looks bad if one country overflows onto 2 lines
+			padding: 5px 10px;
+		}
+
+		.country.highlight {
+			background-color: $hover-color;
+		}
+
+		.flag, .country-name {
+			vertical-align: middle;
+		}
+
+		// spacing between country flag and name
+		.flag {
+			margin-right: 6px;
+		}
+	}
+
+	&.inside {
+		input, input[type=text] {
+			padding-right: $input-padding;
+			padding-left: $selected-flag-arrow-width + $input-padding;
+			margin-left: 0;
+		}
+
+		.flag-dropdown {
+			right: auto;
+			left: 0;
+		}
+
+		.selected-flag {
+			width: $selected-flag-arrow-width;
+		}
+	}
+
+	&.inside {
+		// hover state - show flag is clickable
+		.flag-dropdown:hover {
+			cursor: pointer;
+
+			.selected-flag {
+				background-color: $hover-color;
+			}
+		}
+		// disable hover state when input is disabled
+		input[disabled] + .flag-dropdown:hover, input[readonly] + .flag-dropdown:hover {
+			cursor: default;
+
+			.selected-flag {
+				background-color: transparent;
+			}
+		}
+	}
+
+	.flag {
+		width: $flag-width;
+		height: $flag-height;
+		box-shadow: 0px 0px 1px 0px #888;
+		background-image: url("#{$flags-image-path}#{$flags-image-name}.#{$flags-image-extension}");
+		background-repeat: no-repeat;
+		// empty state
+		background-color: #dbdbdb;
+		background-position: $flag-width 0;
+
+		@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+			background-image: url("#{$flags-image-path}#{$flags-image-name}@2x.#{$flags-image-extension}");
+		}
+	}
+}

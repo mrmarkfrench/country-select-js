@@ -1,0 +1,7 @@
+@function retina-size($value) {
+	@return floor($value / 2);
+}
+
+@mixin retina-bg-size($spriteWidth, $spriteHeight) {
+	background-size: floor($spriteWidth / 2) floor($spriteHeight / 2);
+}
