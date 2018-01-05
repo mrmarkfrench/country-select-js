@@ -15,6 +15,8 @@
 		defaultCountry: "",
 		// Position the selected flag inside or outside of the input
 		defaultStyling: "inside",
+        // don't display these countries
+        excludeCountries: [],
 		// Display only these countries
 		onlyCountries: [],
 		// The countries at the top of the list. Defaults to United States and United Kingdom
@@ -43,7 +45,7 @@
 	}
 	Plugin.prototype = {
 		init: function() {
-			// Process all the data: onlyCountries, preferredCountries, defaultCountry etc
+			// Process all the data: onlyCountries, excludeCountries, preferredCountries, defaultCountry etc
 			this._processCountryData();
 			// Generate the markup
 			this._generateMarkup();
@@ -61,7 +63,7 @@
 		/********************
 		 *  PRIVATE METHODS
 		 ********************/
-		// prepare all of the country data, including onlyCountries, preferredCountries and
+		// prepare all of the country data, including onlyCountries, excludeCountries, preferredCountries and
 		// defaultCountry options
 		_processCountryData: function() {
 			// set the instances country data objects
@@ -81,7 +83,14 @@
 					}
 				});
 				this.countries = newCountries;
-			} else {
+			} else if (this.options.excludeCountries.length) {
+                var lowerCaseExcludeCountries = this.options.excludeCountries.map(function(country) {
+                    return country.toLowerCase();
+                });
+                this.countries = allCountries.filter(function(country) {
+                    return lowerCaseExcludeCountries.indexOf(country.iso2) === -1;
+                });
+            } else {
 				this.countries = allCountries;
 			}
 		},
@@ -229,7 +238,9 @@
 			if (this.options.initialCountry === "auto") {
 				this._loadAutoCountry();
 			} else {
-				this.selectCountry(this.defaultCountry);
+				if (this.defaultCountry) {
+					this.selectCountry(this.defaultCountry);
+				}
 				this.autoCountryDeferred.resolve();
 			}
 		},
