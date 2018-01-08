@@ -184,5 +184,5 @@ $ gulp build
 
 ## Attributions
 * This library is built based on the excellent [International Telephone Input](https://github.com/Bluefieldscom/intl-tel-input.git), the authors of which deserve any credit you might like to give (though none of the blame)
-* Flag images and CSS from [Flag Sprites](http://flag-sprites.com) (which uses [FamFamFam](https://github.com/tkrotoff/famfamfam_flags))
+* Flag images and CSS from [Region-Flags](https://github.com/behdad/region-flags)
 * Original country data from mledoze's [World countries in JSON, CSV and XML](https://github.com/mledoze/countries)
