@@ -4,6 +4,8 @@
 		define([ "jquery" ], function($) {
 			factory($, window, document);
 		});
+	} else if (typeof module === "object" && module.exports) {
+		module.exports = factory(require("jquery"), window, document);
 	} else {
 		factory(jQuery, window, document);
 	}
