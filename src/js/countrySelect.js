@@ -333,6 +333,7 @@
 			// we cannot just stopPropagation as it may be needed to close another instance
 			var isOpening = true;
 			$("html").on("click" + this.ns, function(e) {
+				e.preventDefault();
 				if (!isOpening) {
 					that._closeDropdown();
 				}
