@@ -12,6 +12,9 @@
 		"international",
 		"jQuery"
 	],
+	"scripts": {
+		"build": "gulp build"
+	},
 	"author": "Mark French",
 	"license": "MIT",
 	"bugs": {
