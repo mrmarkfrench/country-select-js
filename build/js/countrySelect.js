@@ -20,7 +20,9 @@
 		// Display only these countries
 		onlyCountries: [],
 		// The countries at the top of the list. Defaults to United States and United Kingdom
-		preferredCountries: [ "us", "gb" ]
+		preferredCountries: [ "us", "gb" ],
+		// Set the dropdown's width to be the same as the input. This is automatically enabled for small screens.
+		responsiveDropdown: ($(window).width() < 768 ? true : false),
 	}, keys = {
 		UP: 38,
 		DOWN: 40,
@@ -151,6 +153,15 @@
 			}
 			// now we can grab the dropdown height, and hide it properly
 			this.dropdownHeight = this.countryList.outerHeight();
+			// set the dropdown width according to the input if responsiveDropdown option is present or if it's a small screen
+			if (this.options.responsiveDropdown) {
+				$(window).resize(function() {
+					$('.country-select').each(function() {
+						var dropdownWidth = this.offsetWidth;
+						$(this).find('.country-list').css("width", dropdownWidth + "px");
+					});
+				}).resize();
+			}
 			this.countryList.removeClass("v-hide").addClass("hide");
 			// this is useful in lots of places
 			this.countryListItems = this.countryList.children(".country");
@@ -238,7 +249,9 @@
 			if (this.options.initialCountry === "auto") {
 				this._loadAutoCountry();
 			} else {
-				this.selectCountry(this.defaultCountry);
+				if (this.defaultCountry) {
+					this.selectCountry(this.defaultCountry);
+				}
 				this.autoCountryDeferred.resolve();
 			}
 		},
