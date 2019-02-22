@@ -15,8 +15,8 @@
 		defaultCountry: "",
 		// Position the selected flag inside or outside of the input
 		defaultStyling: "inside",
-        // don't display these countries
-        excludeCountries: [],
+		// don't display these countries
+		excludeCountries: [],
 		// Display only these countries
 		onlyCountries: [],
 		// The countries at the top of the list. Defaults to United States and United Kingdom
