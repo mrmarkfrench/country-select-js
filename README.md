@@ -174,21 +174,22 @@ The dropdown should automatically appear above/below the input depending on the 
 ## Contributing
 Contributions and improvements to the library are welcome! For instructions on contributing to a project on Github, see this guide: [Fork A Repo](https://help.github.com/articles/fork-a-repo).
 
-To start a local devserver with source code live reload install the dependencies with:
-
+If you are treating the library as a Node package, the following will be relevant to you.
+> To start a local devserver with source code live reload install the dependencies with:
+>
+> ```
+ $ npm install
 ```
-$ npm install
-```
-
-And run:
-
-```
+>
+> And run:
+>
+> ```
 $ gulp
 ```
-
-To transpile the scss source, minify and prepare your changes at src to build run:
-
-```
+>
+> To transpile the scss source, minify and prepare your changes at src to build run:
+>
+>```
 $ gulp build
 ```
 
