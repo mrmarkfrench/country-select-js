@@ -62,6 +62,16 @@ Try it for yourself using the included demo.html.
 
 
 ## Options
+Pass an (optional) object as a parameter to the `countrySelect` method when initializing the selector.
+  ```
+  $("#country").countrySelect({
+    defaultCountry: "jp",
+    onlyCountries: ['us', 'gb', 'ch', 'ca', 'do', 'jp'],
+    preferredCountries: ['ca', 'gb', 'us'],
+    responsiveDropdown: true
+  });
+  ```
+
 Note: any options that take country codes should be lower case [ISO 3166-1 alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) codes  
 
 **defaultCountry**  
