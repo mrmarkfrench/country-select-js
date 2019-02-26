@@ -178,20 +178,20 @@ If you are treating the library as a Node package, the following will be relevan
 > To start a local devserver with source code live reload install the dependencies with:
 >
 > ```
- $ npm install
-```
+> $ npm install
+> ```
 >
 > And run:
 >
 > ```
-$ gulp
-```
+> $ gulp
+> ```
 >
 > To transpile the scss source, minify and prepare your changes at src to build run:
 >
 >```
-$ gulp build
-```
+> $ gulp build
+> ```
 
 ## Attributions
 * This library is built based on the excellent [International Telephone Input](https://github.com/Bluefieldscom/intl-tel-input.git), the authors of which deserve any credit you might like to give (though none of the blame)
