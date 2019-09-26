@@ -4,6 +4,8 @@
 		define([ "jquery" ], function($) {
 			factory($, window, document);
 		});
+	} else if (typeof module === "object" && module.exports) {
+		module.exports = factory(require("jquery"), window, document);
 	} else {
 		factory(jQuery, window, document);
 	}
@@ -28,7 +30,9 @@
 		DOWN: 40,
 		ENTER: 13,
 		ESC: 27,
+		BACKSPACE: 8,
 		PLUS: 43,
+		SPACE: 32,
 		A: 65,
 		Z: 90
 	}, windowLoaded = false;
@@ -59,6 +63,8 @@
 			this.autoCountryDeferred = new $.Deferred();
 			// Get auto country.
 			this._initAutoCountry();
+			// Keep track as the user types
+		        this.typedLetters = "";
 
 			return this.autoCountryDeferred;
 		},
@@ -331,6 +337,7 @@
 			// we cannot just stopPropagation as it may be needed to close another instance
 			var isOpening = true;
 			$("html").on("click" + this.ns, function(e) {
+				e.preventDefault();
 				if (!isOpening) {
 					that._closeDropdown();
 				}
@@ -353,10 +360,12 @@
 				} else if (e.which == keys.ESC) {
 					// esc to close
 					that._closeDropdown();
-				} else if (e.which >= keys.A && e.which <= keys.Z) {
-					// upper case letters (note: keyup/keydown only return upper case letters)
-					// cycle through countries beginning with that letter
-					that._handleLetterKey(e.which);
+				} else if (e.which >= keys.A && e.which <= keys.Z || e.which === keys.SPACE) {
+					that.typedLetters += String.fromCharCode(e.which);
+					that._filterCountries(that.typedLetters);
+				} else if (e.which === keys.BACKSPACE) {
+					that.typedLetters = that.typedLetters.slice(0, -1);
+					that._filterCountries(that.typedLetters);
 				}
 			});
 		},
@@ -380,18 +389,14 @@
 				this._selectListItem(currentCountry);
 			}
 		},
-		// Iterate through the countries starting with the given letter
-		_handleLetterKey: function(key) {
-			var letter = String.fromCharCode(key);
-			// filter out the countries beginning with that letter
+		_filterCountries: function(letters) {
 			var countries = this.countryListItems.filter(function() {
-				return $(this).text().charAt(0) == letter && !$(this).hasClass("preferred");
+				return $(this).text().toUpperCase().indexOf(letters) === 0 && !$(this).hasClass("preferred");
 			});
 			if (countries.length) {
 				// if one is already highlighted, then we want the next one
 				var highlightedCountry = countries.filter(".highlight").first(), listItem;
-				// if the next country in the list also starts with that letter
-				if (highlightedCountry && highlightedCountry.next() && highlightedCountry.next().text().charAt(0) == letter) {
+				if (highlightedCountry && highlightedCountry.next() && highlightedCountry.next().text().toUpperCase().indexOf(letters) === 0) {
 					listItem = highlightedCountry.next();
 				} else {
 					listItem = countries.first();
@@ -484,6 +489,7 @@
 			$("html").off("click" + this.ns);
 			// unbind both hover and click listeners
 			this.countryList.off(this.ns);
+			this.typedLetters = "";
 		},
 		// check if an element is visible within its container, else scroll until it is
 		_scrollTo: function(element) {
