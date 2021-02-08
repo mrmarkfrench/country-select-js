@@ -84,7 +84,7 @@ Display only the countries you specify. Takes an array of country codes.
 
 **excludeCountries**  
 Type: `Array` Default: `undefined`  
-Display only the countries you specify. Takes an array of country codes.
+Display only the countries not specified. Takes an array of country codes.
 
 **preferredCountries**  
 Type: `Array` Default: `["us", "gb"]`  
