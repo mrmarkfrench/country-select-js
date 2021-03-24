@@ -638,6 +638,9 @@
 		n: "Anguilla",
 		i: "ai"
 	}, {
+		n: "Antarctica",
+		i: "aq"
+	}, {
 		n: "Antigua and Barbuda",
 		i: "ag"
 	}, {
@@ -697,6 +700,9 @@
 	}, {
 		n: "Botswana",
 		i: "bw"
+	}, {
+		n: "Bouvet Island",
+		i: "bv"
 	}, {
 		n: "Brazil (Brasil)",
 		i: "br"
@@ -845,6 +851,9 @@
 		n: "French Polynesia (Polynésie française)",
 		i: "pf"
 	}, {
+		n: "French Southern Territories",
+		i: "tf"
+	}, {
 		n: "Gabon",
 		i: "ga"
 	}, {
@@ -895,6 +904,9 @@
 	}, {
 		n: "Haiti",
 		i: "ht"
+	}, {
+		n: "Heard Island and Mcdonald Islands",
+		i: "hm"
 	}, {
 		n: "Honduras",
 		i: "hn"
