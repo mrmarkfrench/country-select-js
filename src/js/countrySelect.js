@@ -701,7 +701,7 @@
 		n: "Botswana",
 		i: "bw"
 	}, {
-		n: "Bouvet Island",
+		n: "Bouvet Island (Bouvetøya)",
 		i: "bv"
 	}, {
 		n: "Brazil (Brasil)",
@@ -851,7 +851,7 @@
 		n: "French Polynesia (Polynésie française)",
 		i: "pf"
 	}, {
-		n: "French Southern Territories",
+		n: "French Southern Territories (Terres australes françaises)",
 		i: "tf"
 	}, {
 		n: "Gabon",
