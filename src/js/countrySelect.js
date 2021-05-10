@@ -413,10 +413,21 @@
 			var value = this.countryInput.val().replace(/(?=[() ])/g, '\\');
 			if (value) {
 				var countryCodes = [];
-				var matcher = new RegExp("^"+value, "i");
-				for (var i = 0; i < this.countries.length; i++) {
-					if (this.countries[i].name.match(matcher)) {
-						countryCodes.push(this.countries[i].iso2);
+				var matcher = new RegExp(value, "i");
+				// Check for ISO codes only
+				if(value.length <= 2) {
+					for (var i = 0; i < this.countries.length; i++) {
+						if (this.countries[i].iso2.match(matcher)) {
+							countryCodes.push(this.countries[i].iso2);
+						}
+					}
+				}
+				// If no previous matches / larger than 2 chars, then search country name
+				if(countryCodes.length == 0) {
+					for (var i = 0; i < this.countries.length; i++) {
+						if (this.countries[i].name.match(matcher)) {
+							countryCodes.push(this.countries[i].iso2);
+						}
 					}
 				}
 				// Check if one of the matching countries is already selected
