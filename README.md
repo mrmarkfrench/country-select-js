@@ -94,12 +94,6 @@ Specify the countries to appear at the top of the list.
 Type: `Boolean` Default: `false`  
 Set the dropdown's width to be the same as the input. This is automatically enabled for small screens.
 
-**localizedCountries**  
-Type: `Object` Default: `{}`  
-Allows to translate the countries by its given iso code e.g.:
- ```js
-{ 'de': 'Deutschland' }
-```
 
 ## Public Methods
 **destroy**  
