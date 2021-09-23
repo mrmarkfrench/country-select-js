@@ -23,6 +23,8 @@
 		onlyCountries: [],
 		// The countries at the top of the list. Defaults to United States and United Kingdom
 		preferredCountries: [ "us", "gb" ],
+		// localized country names e.g. { 'de': 'Deutschland' }
+		localizedCountries: null,
 		// Set the dropdown's width to be the same as the input. This is automatically enabled for small screens.
 		responsiveDropdown: ($(window).width() < 768 ? true : false),
 	}, keys = {
@@ -78,6 +80,12 @@
 			this._setInstanceCountryData();
 			// set the preferredCountries property
 			this._setPreferredCountries();
+			// translate countries according to localizedCountries option
+			if (this.options.localizedCountries) this._translateCountriesByLocale();
+			// sort countries by name
+			if (this.options.onlyCountries.length || this.options.localizedCountries) {
+				this.countries.sort(this._countryNameSort);
+			}
 		},
 		// process onlyCountries array if present
 		_setInstanceCountryData: function() {
@@ -113,6 +121,19 @@
 					that.preferredCountries.push(countryData);
 				}
 			});
+		},
+		// Translate Countries by object literal provided on config
+		_translateCountriesByLocale() {
+			for (let i = 0; i < this.countries.length; i++) {
+				const iso = this.countries[i].iso2.toLowerCase();
+				if (this.options.localizedCountries.hasOwnProperty(iso)) {
+					this.countries[i].name = this.options.localizedCountries[iso];
+				}
+			}
+		},
+		// sort by country name
+		_countryNameSort(a, b) {
+			return a.name.localeCompare(b.name);
 		},
 		// generate all of the markup for the plugin: the selected flag overlay, and the dropdown
 		_generateMarkup: function() {
@@ -413,10 +434,21 @@
 			var value = this.countryInput.val().replace(/(?=[() ])/g, '\\');
 			if (value) {
 				var countryCodes = [];
-				var matcher = new RegExp("^"+value, "i");
-				for (var i = 0; i < this.countries.length; i++) {
-					if (this.countries[i].name.match(matcher)) {
-						countryCodes.push(this.countries[i].iso2);
+				var matcher = new RegExp(value, "i");
+				// Check for ISO codes only
+				if(value.length <= 2) {
+					for (var i = 0; i < this.countries.length; i++) {
+						if (this.countries[i].iso2.match(matcher)) {
+							countryCodes.push(this.countries[i].iso2);
+						}
+					}
+				}
+				// If no previous matches / larger than 2 chars, then search country name
+				if(countryCodes.length == 0) {
+					for (var i = 0; i < this.countries.length; i++) {
+						if (this.countries[i].name.match(matcher)) {
+							countryCodes.push(this.countries[i].iso2);
+						}
 					}
 				}
 				// Check if one of the matching countries is already selected
@@ -638,6 +670,9 @@
 		n: "Anguilla",
 		i: "ai"
 	}, {
+		n: "Antarctica",
+		i: "aq"
+	}, {
 		n: "Antigua and Barbuda",
 		i: "ag"
 	}, {
@@ -697,6 +732,9 @@
 	}, {
 		n: "Botswana",
 		i: "bw"
+	}, {
+		n: "Bouvet Island (Bouvetøya)",
+		i: "bv"
 	}, {
 		n: "Brazil (Brasil)",
 		i: "br"
@@ -845,6 +883,9 @@
 		n: "French Polynesia (Polynésie française)",
 		i: "pf"
 	}, {
+		n: "French Southern Territories (Terres australes françaises)",
+		i: "tf"
+	}, {
 		n: "Gabon",
 		i: "ga"
 	}, {
@@ -895,6 +936,9 @@
 	}, {
 		n: "Haiti",
 		i: "ht"
+	}, {
+		n: "Heard Island and Mcdonald Islands",
+		i: "hm"
 	}, {
 		n: "Honduras",
 		i: "hn"
