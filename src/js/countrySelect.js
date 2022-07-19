@@ -459,6 +459,9 @@
 					}
 				});
 				if (!alreadySelected) {
+					if(countryCodes.length == 0) {
+                        			return false;
+                    			}
 					this._selectFlag(countryCodes[0]);
 					this.countryCodeInput.val(countryCodes[0]).trigger("change");
 				}
