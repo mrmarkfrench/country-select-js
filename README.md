@@ -159,20 +159,20 @@ $.fn.countrySelect.setCountryData(countryData);
 **Image path**  
 Depending on your project setup, you may need to override the path to flags.png in your CSS.  
 ```css
-.country-select-input .flag {background-image: url("path/to/flags.png");}
+.country-select .flag {background-image: url("path/to/flags.png");}
 ```
 
 **Full width input**  
 If you want your input to be full-width, you need to set the container to be the same i.e.
 ```css
-.country-select-input {width: 100%;}
+.country-select {width: 100%;}
 ```
 
 **Input margin**  
-For the sake of alignment, the default CSS forces the input's vertical margin to `0px`. If you want vertical margin, you should add it to the container (with class `country-select-input`).
+For the sake of alignment, the default CSS forces the input's vertical margin to `0px`. If you want vertical margin, you should add it to the container (with class `country-select`).
 
 **Displaying error messages**  
-If your error handling code inserts an error message before the `<input>` it will break the layout. Instead you must insert it before the container (with class `country-select-input`).
+If your error handling code inserts an error message before the `<input>` it will break the layout. Instead you must insert it before the container (with class `country-select`).
 
 **Dropdown position**  
 The dropdown should automatically appear above/below the input depending on the available space. For this to work properly, you must only initialise the plugin after the `<input>` has been added to the DOM.
