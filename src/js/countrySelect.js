@@ -236,9 +236,9 @@
 						defaultCountry = this.preferredCountries.length ? this.preferredCountries[0] : this.countries[0];
 					}
 				} else if (this.options.defaultCountry === '' || typeof this.option.defaultCountry === 'null') {
-                    defaultCountry = this._getCountryData('', true);
+                   				 defaultCountry = this._getCountryData('', true);
 				} else {
-                    defaultCountry = this.preferredCountries.length ? this.preferredCountries[0] : this.countries[0];
+                    				defaultCountry = this.preferredCountries.length ? this.preferredCountries[0] : this.countries[0];
                 }
 				this.defaultCountry = defaultCountry.iso2;
 			}
