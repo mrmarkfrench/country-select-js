@@ -214,12 +214,14 @@
 		// set the initial state of the input value and the selected flag
 		_setInitialState: function() {
 			var flagIsSet = false;
+
 			// If the input is pre-populated, then just update the selected flag
 			if (this.countryInput.val()) {
 				flagIsSet = this._updateFlagFromInputVal();
 			}
 			// If the country code input is pre-populated, update the name and the selected flag
 			var selectedCode = this.countryCodeInput.val();
+
 			if (selectedCode) {
 				this.selectCountry(selectedCode);
 			}
@@ -233,9 +235,11 @@
 					if (!defaultCountry) {
 						defaultCountry = this.preferredCountries.length ? this.preferredCountries[0] : this.countries[0];
 					}
+				} else if (this.options.defaultCountry === '' || typeof this.option.defaultCountry === 'null') {
+                    defaultCountry = this._getCountryData('', true);
 				} else {
-					defaultCountry = this.preferredCountries.length ? this.preferredCountries[0] : this.countries[0];
-				}
+                    defaultCountry = this.preferredCountries.length ? this.preferredCountries[0] : this.countries[0];
+                }
 				this.defaultCountry = defaultCountry.iso2;
 			}
 		},
@@ -266,10 +270,13 @@
 			// with correctly chosen flag is spelled out on blur. Also, correctly
 			// selects flag when field is autofilled
 			this.countryInput.on("blur" + this.ns, function() {
-				if (that.countryInput.val() != that.getSelectedCountryData().name) {
+                if(!that.countryInput.val()) {
+                    that.setCountry('');
+                    return;
+                } else if (that.countryInput.val() != that.getSelectedCountryData()?.name) {
 					that.setCountry(that.countryInput.val());
 				}
-				that.countryInput.val(that.getSelectedCountryData().name);
+				that.countryInput.val(that.getSelectedCountryData()?.name || '');
 			});
 		},
 		_initAutoCountry: function() {
@@ -432,6 +439,7 @@
 			var that = this;
 			// try and extract valid country from input
 			var value = this.countryInput.val().replace(/(?=[() ])/g, '\\');
+
 			if (value) {
 				var countryCodes = [];
 				var matcher = new RegExp(value, "i");
@@ -443,6 +451,7 @@
 						}
 					}
 				}
+
 				// If no previous matches / larger than 2 chars, then search country name
 				if(countryCodes.length == 0) {
 					for (var i = 0; i < this.countries.length; i++) {
@@ -451,6 +460,7 @@
 						}
 					}
 				}
+
 				// Check if one of the matching countries is already selected
 				var alreadySelected = false;
 				$.each(countryCodes, function(i, c) {
@@ -459,17 +469,21 @@
 					}
 				});
 				if (!alreadySelected) {
-					if(countryCodes.length == 0) {
-                        			return false;
-                    			}
+
+                    if(countryCodes.length == 0) return false;
+
 					this._selectFlag(countryCodes[0]);
 					this.countryCodeInput.val(countryCodes[0]).trigger("change");
 				}
 				// Matching country found
 				return true;
-			}
+			} else {
+                this._selectFlag('');
+                this.countryCodeInput.val(null).trigger("change");
+                return true;
+            }
 			// No match found
-			return false;
+			// return false;
 		},
 		// remove highlighting from other list items and highlight the given item
 		_highlightListItem: function(listItem) {
@@ -489,15 +503,15 @@
 		},
 		// update the selected flag and the active list item
 		_selectFlag: function(countryCode) {
-			if (! countryCode) {
-				return false;
-			}
+
+            var countryData = !countryCode ? this._getCountryData(countryCode, true) : this._getCountryData(countryCode);
+
 			this.selectedFlagInner.attr("class", "flag " + countryCode);
 			// update the title attribute
-			var countryData = this._getCountryData(countryCode);
 			this.selectedFlagInner.parent().attr("title", countryData.name);
 			// update the active list item
-			var listItem = this.countryListItems.children(".flag." + countryCode).first().parent();
+            const className = !countryCode ? ".flag" : ".flag." + countryCode;
+			var listItem = this.countryListItems.children(className).first().parent();
 			this.countryListItems.removeClass("active");
 			listItem.addClass("active");
 		},
@@ -1398,7 +1412,10 @@
 	}, {
 		n: "Zimbabwe",
 		i: "zw"
-	} ], function(i, c) {
+	}, {
+        	n: '', // No country selected
+        	i: '' 
+    }], function(i, c) {
 		c.name = c.n;
 		c.iso2 = c.i;
 		delete c.n;
